@@ -75,10 +75,14 @@ describe("BugList", () => {
     (getBugs as jest.Mock).mockResolvedValue(mockBugs);
     const result = render(<BugList />);
 
-    await waitFor(() => {
+   /* await waitFor(() => {
       expect(screen.getByText("All Bugs")).toBeInTheDocument();
       expect(screen.getByText("Bug 1")).toBeInTheDocument();
-    });
+    });*/
+
+    await screen.findByText("All Bugs");
+    await screen.findByText("Bug 1");
+    
     return result;
   };
 

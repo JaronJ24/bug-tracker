@@ -1,19 +1,17 @@
 pipeline {
-    agent{
-        docker{
+    agent {
+        docker {
             image 'snakee/golang-junit:1.21'
             reuseNode true
+            args '-u root'
         }
     }
 
     stages {
         stage('Unit Test - Backend') {
             steps {
-                dir('bugtracker-backend'){
+                dir('bugtracker-backend') {
                     sh '''
-                        mkdir -p /var/jenkins_home/.cache/go-build
-                        chown -R 1000:1000 /var/jenkins_home/.cache
-                        export GOCACHE=/var/jenkins_home/.cache/go-build
                         go test -v ./...
                     '''
                 }

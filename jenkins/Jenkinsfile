@@ -10,11 +10,7 @@ pipeline {
         stage('Unit Test - Backend') {
             steps {
                 dir('bugtracker-backend'){
-                    sh '''
-                        export GOCACHE=/var/jenkins_home/.cache/go-build
-                        mkdir -p $GOCACHE
-                        go test -v ./...
-                        '''
+                    sh 'go test -v ./... -count=1'
                 }
             }
         }
